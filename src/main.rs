@@ -1,6 +1,5 @@
 use anyhow::{bail, ensure, Result};
 use indicatif::{ProgressBar, ProgressStyle};
-use rustc_version::Channel;
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -148,10 +147,6 @@ TARGETS:
     }
 
     let rustc_meta = rustc_version::version_meta()?;
-    match rustc_meta.channel {
-        Channel::Nightly | Channel::Dev => {}
-        channel => bail!("{:?} channel not supported", channel),
-    }
 
     // Ensure there is a --target argument,
     // Determine which target we're building for, and replace it with our fake target.
